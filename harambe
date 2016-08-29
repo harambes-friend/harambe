@@ -1,9 +1,9 @@
 #!/usr/bin/perl
 
 ##
-## Cowsay 3.03
+## Harambe, 1.00
 ##
-## This file is part of cowsay.  (c) 1999-2000 Tony Monroe.
+## This file is based on cowsay.  (c) 1999-2000 Tony Monroe.
 ##
 
 use Text::Tabs qw(expand);
@@ -12,11 +12,11 @@ use File::Basename;
 use Getopt::Std;
 use Cwd;
 
-$version = "3.03";
+$version = "1.00";
 $progname = basename($0);
 $eyes = "oo";
 $tongue = "  ";
-$cowpath = $ENV{'COWPATH'} || '/usr/share/cows';
+$cowpath = $ENV{'COWPATH'} || './friends';
 @message = ();
 $thoughts = "";
 
@@ -37,7 +37,7 @@ if (($^O eq "MSWin32") or ($^O eq "Windows_NT")) {	## Many perls, eek!
 
 %opts = (
     'e'		=>	'oo',
-    'f'		=>	'default.cow',
+    'f'		=>	'harambe.cow',
     'n'		=>	0,
     'T'		=>	'  ',
     'W'		=>	40,
@@ -75,7 +75,7 @@ sub list_cowfiles {
     my @dirfiles;
     chop($basedir = cwd);
     for my $d (split(/$pathsep/, $cowpath)) {
-	print "Cow files in $d:\n";
+	print "Friend files in $d:\n";
 	opendir(COWDIR, $d) || die "$0: Cannot open $d\n";
 	for my $file (readdir COWDIR) {
 	    if ($file =~ s/\.cow$//) {
@@ -153,7 +153,7 @@ sub construct_face {
 
 sub get_cow {
 ##
-## Get a cow from the specified cowfile; otherwise use the default cow
+## Get a friend from the specified cowfile; otherwise use Harambe
 ## which was defined above in $the_cow.
 ##
     my $f = $opts{'f'};
@@ -180,7 +180,7 @@ sub get_cow {
 
 sub display_usage {
 	die <<EOF;
-cow{say,think} version $version, (c) 1999 Tony Monroe
+harambe version $version, based on Tony Monroe's cowsay
 Usage: $progname [-bdgpstwy] [-h] [-e eyes] [-f cowfile] 
           [-l] [-n] [-T tongue] [-W wrapcolumn] [message]
 EOF
